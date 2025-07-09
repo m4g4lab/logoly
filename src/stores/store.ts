@@ -8,11 +8,11 @@ export const useStore = defineStore('store', () => {
   //Needed for the SVG Export (otherwise you can edit the SVG in the browser which breaks and and leads into new issues)
   const editable = ref(true);
 
-  function updatePrefix(text) {
+  function updatePrefix(text: string) {
     prefix.value = text;
   }
 
-  function updateSuffix(text) {
+  function updateSuffix(text: string) {
     suffix.value = text;
   }
 

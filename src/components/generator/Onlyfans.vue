@@ -2,38 +2,23 @@
   <div class="flex flex-col items-center">
     <v-tooltip text="Edit the text to create your own logo" model-value location="top">
       <template v-slot:activator="{ props }">
-        <div v-bind="props" class="box">
-          <div
-            class="editarea"
-            id="logo"
-            :style="{
-              'font-size': fontSize + 'px',
-              'background-color': transparentBgColor
-            }"
-          >
-            <span
-              @input="updatePrefix"
-              class="prefix"
-              :style="{ color: prefixColor }"
-              :contenteditable="store.editable"
-              spellcheck="false"
-            >
+        <div v-bind="props" class="border border-solid border-#333
+        rounded-lg p-10 my-10 mx-2.5 max-w-full">
+          <div class="p-5 text-center text-3xl fw-700" id="logo" :style="{
+            'font-size': fontSize + 'px',
+            'background-color': transparentBgColor
+          }">
+            <span @input="updatePrefix" class="text-white py-5px" :style="{ color: prefixColor }"
+              :contenteditable="store.editable" spellcheck="false">
               {{ store.prefix }}
             </span>
             <!-- HACK: meaningless text: ".", just to split input area, see: #269 -->
             <span style="font-size: 0">.</span>
-            <span
-              class="postfix"
-              :style="{
-                color: suffixColor,
-                'background-color': postfixBgColor,
-                'margin-left': suffixMargin
-              }"
-              :contenteditable="store.editable"
-              @input="updateSuffix"
-              spellcheck="false"
-              >{{ store.suffix }}</span
-            >
+            <span class="text-black bg-#f90 py-5px px-10px rounded-7px" :style="{
+              color: suffixColor,
+              'background-color': postfixBgColor,
+              'margin-left': suffixMargin
+            }" :contenteditable="store.editable" @input="updateSuffix" spellcheck="false">{{ store.suffix }}</span>
           </div>
         </div>
       </template>
@@ -41,28 +26,44 @@
 
     <div class="w-1/3 mb-12">
       <div class="flex flex-col">
-        Font Size: {{ fontSize }}px
+
+        <p class="text-#f90">Font Size: {{ fontSize[0] }} px </p>
         <div class="-ml-1">
-          <v-slider
-            hide-details
-            min="30"
-            max="200"
-            step="1"
-            color="#f90"
-            v-model="fontSize"
-          ></v-slider>
+          <!-- <v-slider hide-details min="30" max="200" step="1" color="#f90" v-model="fontSize"></v-slider> -->
+          <SliderRoot v-model="fontSize" class="relative flex items-center select-none touch-none w-[200px] h-5"
+            :max="200" :step="1" :min="30">
+            <SliderTrack class="bg-stone-500/30 relative grow  rounded-full h-2">
+              <SliderRange class="absolute bg-#f90 rounded-full h-full" />
+            </SliderTrack>
+            <SliderThumb
+              class="block w-6 h-6 bg-white rounded-full hover:bg-stone-50 shadow-sm focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-#f90"
+              aria-label="Volume" />
+          </SliderRoot>
         </div>
       </div>
       <div class="flex items-center">
-        Transparent Background: <v-checkbox-btn v-model="transparentBg"></v-checkbox-btn>
+        <!-- Transparent Background: -->
+        <!-- <v-checkbox-btn v-model="transparentBg"></v-checkbox-btn> -->
+        <div class="flex flex-col gap-2.5">
+          <label class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100">
+            <span class="select-none text-#f90 text-sm dark:text-white">Transparent Background:</span>
+            <CheckboxRoot v-model="transparentBg"
+              class="hover:bg-#f90 flex h-5 w-5 appearance-none items-center justify-center rounded-md bg-white shadow-sm border outline-none focus-within:shadow-[0_0_0_2px_black]">
+              <CheckboxIndicator class="bg-white w-5 h-5 rounded-1px flex items-center justify-center">
+                <svg class="i-lucide-check h-5 w-5 color-#f90" ></svg>
+              </CheckboxIndicator>
+            </CheckboxRoot>
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="download-share">
+    <div class="flex justify-around w-80%">
       <ExportBtn />
-      <v-btn @click="twitter" color="#1da1f2"
-        ><v-icon icon="mdi-twitter" class="mr-0.5"></v-icon> Tweet</v-btn
-      >
+      <button @click="twitter" color="#1da1f2">
+        <svg class="i-lucide-twitter mr-0.5"></svg>
+        Tweet
+      </button>
     </div>
   </div>
 </template>
@@ -75,7 +76,7 @@ import ExportBtn from '@/components/ExportBtn.vue';
 const prefixColor = ref('#ffffff');
 const suffixColor = ref('#00AFF0');
 const postfixBgColor = ref('transparent');
-const fontSize = ref(60);
+const fontSize = ref([60]);
 const transparentBg = ref(false);
 const suffixMargin = computed(() => {
   return '-' + fontSize.value / 30 + 'rem';
@@ -120,83 +121,4 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="stylus" scoped>
-.pornhub {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.box {
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 40px;
-  margin: 40px 10px;
-  max-width: 100%;
-
-  .editarea {
-    padding: 20px 30px;
-    text-align: center;
-    font-size: 60px;
-    font-weight: 700;
-
-    .prefix {
-      color: #fff;
-      padding: 5px 5px;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 200;
-      font-style: normal;
-    }
-
-    .postfix {
-      color: #000;
-      background-color: transparent;
-      padding: 5px 10px;
-      margin-left: -2rem;
-      font-family: "Arizonia", cursive;
-      font-weight: 400;
-      font-style: normal;
-    }
-  }
-}
-
-.customize {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  margin-bottom: 50px;
-
-  .customize-color > div,
-  .customize-misc > div {
-    padding: 8px 0;
-  }
-}
-
-.download-share {
-  display: flex;
-  justify-content: space-around;
-  width: 80%;
-
-  & > div {
-    width: 100px;
-    height: 40px;
-    border-radius: 3px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  .download {
-    color: black;
-    background: #f90;
-  }
-
-  .share {
-    color: #fff;
-    background: #1da1f2;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

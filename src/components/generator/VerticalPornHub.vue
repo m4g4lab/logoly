@@ -1,10 +1,11 @@
 <template>
-  <div class="pornhub">
+  <div class="flex flex-col items-center">
     <v-tooltip text="Edit the text to create your own logo" location="top" model-value>
       <template v-slot:activator="{ props }">
-        <div v-bind="props" class="box">
+        <div v-bind="props" class="border border-solid border-#333
+        rounded-lg p-10 my-10 mx-2.5 max-w-full">
           <div
-            class="editarea"
+            class="p-5 text-center text-3xl fw-700"
             id="logo"
             :style="{
               'font-size': fontSize + 'px',
@@ -14,7 +15,7 @@
           >
             <template v-if="!reverseHighlight">
               <p
-                class="prefix"
+                class="text-white p-5px"
                 @input="updatePrefix"
                 :style="{ color: prefixColor }"
                 :contenteditable="store.editable"
@@ -22,7 +23,7 @@
                 {{ store.prefix }}
               </p>
               <p
-                class="postfix"
+                class="text-black bg-#f90 py-5px px-10px rounded-7px"
                 @input="updateSuffix"
                 :style="{ color: suffixColor, 'background-color': postfixBgColor }"
                 :contenteditable="store.editable"
@@ -32,7 +33,7 @@
             </template>
             <template v-else>
               <p
-                class="postfix"
+                class="text-black bg-#f90 py-5px px-10px rounded-7px"
                 @input="updatePrefix"
                 :style="{ color: suffixColor, 'background-color': postfixBgColor }"
                 :contenteditable="store.editable"
@@ -40,7 +41,7 @@
                 {{ store.prefix }}
               </p>
               <p
-                class="prefix"
+                class="text-white p-5px"
                 @input="updateSuffix"
                 :style="{ color: prefixColor }"
                 :contenteditable="store.editable"
@@ -53,11 +54,11 @@
       </template>
     </v-tooltip>
 
-    <div class="customize mt-3">
+    <div class="customize flex justify-around w-full mb-50px mt-3">
       <v-tooltip text="Pick a color you like" location="top" model-value>
         <template v-slot:activator="{ props }">
           <div v-bind="props" class="customize-color" id="prefixColor">
-            <div>
+            <div class="py-2">
               Prefix Text Color:
               <v-menu :close-on-content-click="false" location="end">
                 <template v-slot:activator="{ props }">
@@ -70,7 +71,7 @@
                 <v-color-picker mode="hex" hide-inputs v-model="prefixColor"></v-color-picker>
               </v-menu>
             </div>
-            <div>
+            <div class="py-2">
               Suffix Text Color:
               <v-menu :close-on-content-click="false" location="end">
                 <template v-slot:activator="{ props }">
@@ -83,7 +84,7 @@
                 <v-color-picker mode="hex" hide-inputs v-model="suffixColor"></v-color-picker>
               </v-menu>
             </div>
-            <div>
+            <div class="py-2">
               Suffix Background Color:
               <v-menu :close-on-content-click="false" location="end">
                 <template v-slot:activator="{ props }">
@@ -96,15 +97,15 @@
                 <v-color-picker mode="hex" hide-inputs v-model="postfixBgColor"></v-color-picker>
               </v-menu>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center py-2">
               Transparent Background: <v-checkbox-btn v-model="transparentBg"></v-checkbox-btn>
             </div>
           </div>
         </template>
       </v-tooltip>
 
-      <div class="customize-misc">
-        <div class="flex flex-col">
+      <div>
+        <div class="flex flex-col py-2">
           Font Size: {{ fontSize }}px
           <div class="-ml-1">
             <v-slider
@@ -118,7 +119,7 @@
           </div>
         </div>
         <FontSelector />
-        <div class="flex items-center">
+        <div class="flex items-center py-2">
           Reverse Highlight: <v-checkbox-btn v-model="reverseHighlight"></v-checkbox-btn>
         </div>
       </div>
@@ -126,9 +127,10 @@
 
     <div class="download-share">
       <ExportBtn />
-      <v-btn @click="twitter" color="#1da1f2"
-        ><v-icon icon="mdi-twitter" class="mr-0.5"></v-icon> Tweet</v-btn
-      >
+      <button @click="twitter" color="#1da1f2">
+        <svg class="i-lucide-twitter mr-0.5"></svg> 
+        Tweet
+        </button>
     </div>
   </div>
 </template>
@@ -175,68 +177,5 @@ const transparentBgColor = computed(() => {
 });
 </script>
 
-<style lang="stylus" scoped>
-.pornhub
-    display flex
-    flex-direction  column
-    align-items center
-.box
-    border 2px solid #333
-    border-radius 10px
-    padding 40px
-    margin 40px 0px
-    max-width 100%
-    .editarea
-        padding 20px
-        text-align center
-        font-size 60px
-        font-weight 700
-        border-radius 10px
-
-        .prefix
-            color #fff
-            padding 5px 5px
-            margin 0
-
-        .postfix
-            color #000
-            background-color #f90
-            padding 5px 10px
-            border-radius 7px
-            margin 0
-.switch
-    display flex
-    flex-direction row
-    justify-content space-around
-    padding 40px 0px 0px 0px
-    width 80%
-
-// customize things
-.customize
-  display flex
-  justify-content space-around
-  width 100%
-  margin-bottom 50px
-  .customize-color > div,
-  .customize-misc > div
-    padding 8px 0
-
-// download and share buttons
-.download-share
-  display flex
-  justify-content space-around
-  width 80%
-  & > div
-      width 100px
-      height 40px
-      border-radius 3px
-      line-height 40px
-      text-align center
-      cursor pointer
-  .download
-      color black
-      background #f90
-  .share
-    color #fff
-    background #1da1f2
+<style lang="scss" scoped>
 </style>

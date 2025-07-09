@@ -2,24 +2,24 @@
   <div>
     <v-tooltip text="Export your own logo" location="top" model-value>
       <template v-slot:activator="{ props }">
-        <v-btn color="#f90" v-bind="props">
-          <v-icon icon="mdi-download"></v-icon>Export
+        <button color="#f90" v-bind="props">
+          <svg class="i-lucide-download"></svg>
+          Export
           <v-menu activator="parent">
             <v-list>
               <v-list-item key="png" value="png" @click="download('png')">PNG</v-list-item>
               <v-list-item key="svg" value="svg" @click="download('svg')">SVG</v-list-item>
             </v-list>
           </v-menu>
-        </v-btn>
+        </button>
       </template>
     </v-tooltip>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useStore } from '@/stores/store';
 import domtoimage from 'dom-to-image';
-import { ref } from 'vue';
 import { event } from 'vue-gtag';
 import { onClickOutside } from '@vueuse/core';
 
