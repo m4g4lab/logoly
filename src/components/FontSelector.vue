@@ -1,12 +1,28 @@
 <template>
-  <v-select
-    hide-details
-    v-model="store.font"
-    label="Font"
-    :items="fonts"
-    color="#f90"
-    variant="outlined"
-  ></v-select>
+  <SelectRoot default-value="Roboto" class="w-full flex flex-row gap-1">
+    <SelectTrigger class="border-transparent hover:border hover:border-1 rounded-1 outline-none hover:border-#f90 h-10">
+      <SelectValue class="text-#f90 px-1" />
+    </SelectTrigger>
+    <SelectPortal>
+      <SelectContent
+        class="min-w-[180px] h-50 bg-black rounded-lg border shadow-sm will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-[100]">
+        <SelectViewport>
+          <SelectGroup>
+            <SelectItem v-for="(option, index) in fonts" :key="index"
+              class="text-xs leading-none  rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
+              :value="option">
+              <SelectItemIndicator class="absolute left-0 w-[25px] inline-flex items-center justify-center">
+                <svg class="i-lucide-check"></svg>
+              </SelectItemIndicator>
+              <SelectItemText class="text-white">
+                {{ option }}
+              </SelectItemText>
+            </SelectItem>
+          </SelectGroup>
+        </SelectViewport>
+      </SelectContent>
+    </SelectPortal>
+  </SelectRoot>
 </template>
 
 <script setup>
@@ -114,6 +130,6 @@ const fonts = [
   'Alegreya',
   'PT Sans Caption',
   'Alegreya Sans',
-  'Source Code Pro'
+  'Source Code Pro',
 ];
 </script>

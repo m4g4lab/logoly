@@ -1,46 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Inter:wght@100&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body,
 #app {
-  @apply h-screen m-0 p-0 bg-black text-custom-primary font-['Arial'];
+  @apply bg-black text-#ff9900 font-['Arial'];
 }
 
 a {
   @apply text-custom-primary no-underline;
-}
-
-.pb .prefix {
-  @apply text-white p-0.5;
-}
-
-.pb .postfix {
-  @apply text-black bg-custom-primary p-0.5 rounded-md;
-}
-
-.of .prefix {
-  @apply text-white;
-}
-
-.of .postfix {
-  color: #00aff0;
-}
-
-.vph {
-  @apply text-center;
-}
-
-.vph .prefix {
-  @apply text-white m-0;
-}
-
-.vph .postfix {
-  margin: 0px;
-  color: #000;
-  background-color: #f90;
-  padding: 2px;
-  border-radius: 3px;
-  @apply m-0 text-black bg-custom-primary p-0.5 rounded-md;
 }
 
 /* We need that Shizzle for dom-to-image otherwise the exported Img will have wrong fonts */

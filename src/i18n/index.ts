@@ -13,6 +13,7 @@ const getLocale = () => {
     if (res) {
         return res
     }
+    return "zh"
     const webLang = navigator.language
     if (webLang.includes('zh')) {
         return 'zh'

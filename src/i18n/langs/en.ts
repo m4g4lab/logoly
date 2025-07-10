@@ -1,13 +1,5 @@
 export default {
-    "Title": "Animated Art Avatar",
-    "SubTitle": "Minimalist Animated Line Art Avatar Generator",
-    "Animation": "Animation",
-    "Randomize": "Randomize",
-    "Refresh": "Refresh",
-    "Download": "Download",
-    "RandomText": "Click randomize to ignore selections and generate random avatar.",
-
-    "Desc": `A Simole Online Logo Generator`,
+    "Desc": `A Simple Online Logo Generator`,
     "FAQ": "FAQ",
     "Q1": `How to use this generator?`,
     "A1": `The generator is very simple to use. You can get a logo in just 4 steps:`,
@@ -19,8 +11,39 @@ export default {
     "A2": `The generated logo fully belongs to you. You can use it freely for any purposes. Though credit is always appreciated`,
 
 
-    "About": "This project is an open source project, you can find it on",
+    "About": `About`,
+    "AboutContent": `This project is an open source project, you can find it on`,
 
-    "Export your own logo": "Export your own logo",
+    "Edit the text to create your own logo": `Edit the text to create your own logo`,
+
+    "Pick a color you like": `Pick a color you like`,
+
+    "Prefix Text Color:": `Prefix Text Color:`,
+
+    "Suffix Text Color:": `Suffix Text Color:`,
+
+    "Suffix Background Color:": `Suffix Back Color:`, 
+
+    "Transparent Background:": `Transparent Background:`,
+
+    "EXPORT": `EXPORT`,
+
+    "FONT": `FONT`,
+
+    "Font Size:": `Font Size:`,
+
+    "PX": `px`,
+
+    "Reverse Highlight:": `Reverse Highlight:`,
+
+    "Export your own logo": `Export your own logo`,
+
+    "Tweet": `Tweet`,
+
+    "LongDesc": `LogoArt is a creative logo generator, you can generate logo similar to Pornhub, YouTube, and more.`, 
+
+    "If you think this project is funny, please": `If you think this project is funny, please`,
+
+    "Give me a star": `Give me - a star`,
 
 }
