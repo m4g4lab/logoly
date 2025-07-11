@@ -7,8 +7,10 @@ export default () => {
         const langMap: Record<string, string> = {
             'zh': '简体中文',
             'en': 'English',
+            'ja': '日本語',
+            'ko': '한국어',
         }
-        return langMap[locale.value] || '简体中文'
+        return langMap[locale.value] || 'English'
     });
 
     const langChange = (lang: string) => {
