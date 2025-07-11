@@ -24,9 +24,9 @@
 </template>
 
 <script setup>
-import { useStore } from '@/stores/store';
+import { useStore } from '@/stores/store'
 
-const store = useStore();
+const store = useStore()
 const fonts = [
   'Roboto',
   'Zilla Slab Highlight',
@@ -130,5 +130,5 @@ const fonts = [
   'Alegreya Sans',
   'Source Code Pro',
   "Pixelify Sans",
-];
+]
 </script>

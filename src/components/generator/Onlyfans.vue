@@ -74,54 +74,54 @@
 </template>
 
 <script setup>
-import { useStore } from '@/stores/store';
+import { useStore } from '@/stores/store'
 
-const prefixColor = ref('#ffffff');
-const suffixColor = ref('#00AFF0');
-const postfixBgColor = ref('transparent');
-const fontSize = ref([60]);
-const transparentBg = ref(false);
+const prefixColor = ref('#ffffff')
+const suffixColor = ref('#00AFF0')
+const postfixBgColor = ref('transparent')
+const fontSize = ref([60])
+const transparentBg = ref(false)
 const suffixMargin = computed(() => {
-  return '-' + fontSize.value / 30 + 'rem';
-});
+  return '-' + fontSize.value / 30 + 'rem'
+})
 
-const store = useStore();
+const store = useStore()
 
 const updatePrefix = (e) => {
   if (!navigator.userAgent.toLowerCase().includes('firefox')) {
-    store.updatePrefix(e.target.childNodes[0].nodeValue);
+    store.updatePrefix(e.target.childNodes[0].nodeValue)
   }
-};
+}
 
 const updateSuffix = (e) => {
   if (!navigator.userAgent.toLowerCase().includes('firefox')) {
-    store.updateSuffix(e.target.childNodes[0].nodeValue);
+    store.updateSuffix(e.target.childNodes[0].nodeValue)
   }
-};
+}
 
 const twitter = () => {
-  let url = 'https://logoly.pro';
-  let text = encodeURIComponent(`Built with #LogolyPro, by @xiqingongzi ${url}`);
-  window.open(`https://twitter.com/intent/tweet?text=${text}`);
-};
+  let url = 'https://logoly.pro'
+  let text = encodeURIComponent(`Built with #LogolyPro, by @xiqingongzi ${url}`)
+  window.open(`https://twitter.com/intent/tweet?text=${text}`)
+}
 
 const transparentBgColor = computed(() => {
   if (transparentBg.value) {
-    return 'transparent';
+    return 'transparent'
   } else {
-    return '#000000';
+    return '#000000'
   }
-});
+})
 
 onMounted(() => {
-  store.updatePrefix('Only');
-  store.updateSuffix('Fans');
-});
+  store.updatePrefix('Only')
+  store.updateSuffix('Fans')
+})
 
 onBeforeUnmount(() => {
-  store.updatePrefix('edit');
-  store.updateSuffix('me');
-});
+  store.updatePrefix('edit')
+  store.updateSuffix('me')
+})
 </script>
 
 <style lang="scss" scoped></style>

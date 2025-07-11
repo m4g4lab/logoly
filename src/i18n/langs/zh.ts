@@ -35,6 +35,7 @@ export default {
     "PX": `像素`,
 
     "Reverse Highlight:": `反转高亮：`,
+    "Flip Word:": `翻转单词`,
 
     "Export your own logo": `导出你的Logo`,
 
@@ -42,7 +43,7 @@ export default {
 
     "LongDesc": `LogoArt是一个创意Logo生成器，你可以生成类似Pornhub、YouTube 等风格的 Logo。`,
 
-    "If you think this project is funny, please": `如果你觉得这个项目有趣, 请`, 
+    "If you think this project is funny, please": `如果你觉得这个项目有趣, 请`,
 
     "Give me a star": `点个-星星`,
 }

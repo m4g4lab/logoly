@@ -35,6 +35,7 @@ export default {
     "PX": `px`,
 
     "Reverse Highlight:": `Reverse Highlight:`,
+    "Flip Word:": `Flip Word:`,
 
     "Export your own logo": `Export your own logo`,
 
@@ -45,5 +46,6 @@ export default {
     "If you think this project is funny, please": `If you think this project is funny, please`,
 
     "Give me a star": `Give me - a star`,
+    
 
 }

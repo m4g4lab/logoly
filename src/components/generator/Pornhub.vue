@@ -4,31 +4,31 @@
       <TooltipRoot>
         <TooltipTrigger class="bg-black border-none border border-solid border-#333
         rounded-lg p-10 my-10 mx-2.5 max-w-full">
-          <div class="p-5 text-center fw-700" id="logo" :style="{
+          <div class="p-5 text-center fw-700 flex flex-row" id="logo" :style="{
             'font-size': fontSize + 'px',
             'background-color': transparentBgColor,
-            'font-family': store.font
+            'font-family': store.font,
           }">
             <template v-if="!reverseHighlight">
-              <span @input="updatePrefix" class="text-white p-5px" :style="{ color: prefixColor }"
+              <p @input="updatePrefix" class="text-white p-5px"
+                :style="{ 'color': prefixColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
                 :contenteditable="store.editable" spellcheck="false">
                 {{ store.prefix }}
-              </span>
-              <!-- HACK: meaningless text: ".", just to split input area, see: #269 -->
-              <span style="font-size: 0">.</span>
-              <span class="text-black bg-#f90 py-5px px-10px rounded-7px"
-                :style="{ color: suffixColor, 'background-color': postfixBgColor }" :contenteditable="store.editable"
-                @input="updateSuffix" spellcheck="false">{{ store.suffix }}
-              </span>
+              </p>
+              <p class="text-black bg-#f90 py-5px px-10px rounded-7px"
+                :style="{ 'color': suffixColor, 'background-color': postfixBgColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
+                :contenteditable="store.editable" @input="updateSuffix" spellcheck="false">{{ store.suffix }}
+              </p>
             </template>
             <template v-else>
-              <span class="text-black bg-#f90 py-5px px-10px rounded-7px"
-                :style="{ color: suffixColor, 'background-color': postfixBgColor }" :contenteditable="store.editable"
-                @input="updatePrefix" spellcheck="false">{{ store.prefix }}</span>
-              <span class="text-white p-5px" @input="updateSuffix" :style="{ color: prefixColor }"
+              <p class="text-black bg-#f90 py-5px px-10px rounded-7px"
+                :style="{ 'color': suffixColor, 'background-color': postfixBgColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
+                :contenteditable="store.editable" @input="updatePrefix" spellcheck="false">{{ store.prefix }}</p>
+              <p class="text-white p-5px" @input="updateSuffix"
+                :style="{ 'color': prefixColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
                 :contenteditable="store.editable" spellcheck="false">
                 {{ store.suffix }}
-              </span>
+              </p>
             </template>
           </div>
           <!-- </div> -->
@@ -118,6 +118,15 @@
             </CheckboxIndicator>
           </CheckboxRoot>
         </div>
+        <div class="flex items-center py-2 justify-between">
+          <span class="select-none text-#f90 text-sm dark:text-white"> {{ $t("Flip Word:") }} </span>
+          <CheckboxRoot v-model="upAndDown"
+            class="flex h-6 w-6 appearance-none items-center justify-center rounded-md shadow-sm border-2 border-solid border-#f90 outline-none focus-within:shadow-[0_0_0_2px_black]">
+            <CheckboxIndicator class="w-5 h-5 rounded-1px flex items-center justify-center bg-#f90!">
+              <svg class="i-lucide-check h-5 w-5"></svg>
+            </CheckboxIndicator>
+          </CheckboxRoot>
+        </div>
       </div>
     </div>
 
@@ -141,6 +150,7 @@ const postfixBgColor = ref('#ff9900')
 const fontSize = ref([60])
 const transparentBg = ref(false)
 const reverseHighlight = ref(false)
+const upAndDown = ref(false)
 
 const store = useStore()
 const isVertical = ref(false)

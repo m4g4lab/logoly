@@ -1,11 +1,15 @@
 import { createI18n } from "vue-i18n";
 
 import zh from './langs/zh'
+import ko from './langs/ko'
+import ja from './langs/ja'
 import en from './langs/en'
 
 const messages = {
     zh,
-    en
+    ko,
+    ja,
+    en,
 }
 
 const getLocale = () => {
@@ -13,16 +17,22 @@ const getLocale = () => {
     if (res) {
         return res
     }
-    return "zh"
     const webLang = navigator.language
+    console.log(res, webLang)
     if (webLang.includes('zh')) {
         return 'zh'
     }
     if (webLang.includes('en')) {
         return 'en'
     }
+    if (webLang.includes('ko')) {
+        return 'ko'
+    }
+    if (webLang.includes('ja')) {
+        return 'ja'
+    }
 
-    return  res ||  'zh'
+    return  res ||  'en'
 }
 
 const i18n = createI18n({

@@ -10,21 +10,25 @@
             'font-family': store.font
           }">
             <template v-if="!reverseHighlight">
-              <p @input="updatePrefix" class="text-white p-5px" :style="{ color: prefixColor }"
+              <p @input="updatePrefix" class="text-white p-5px"
+                :style="{ 'color': prefixColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
                 :contenteditable="store.editable">
                 {{ store.prefix }}
               </p>
               <p class="text-black bg-#f90 py-5px px-10px rounded-7px" @input="updateSuffix"
-                :style="{ color: suffixColor, 'background-color': postfixBgColor }" :contenteditable="store.editable">
+                :style="{ 'color': suffixColor, 'background-color': postfixBgColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
+                :contenteditable="store.editable">
                 {{ store.suffix }}
               </p>
             </template>
             <template v-else>
               <p class="text-black bg-#f90 py-5px px-10px rounded-7px" @input="updatePrefix"
-                :style="{ color: suffixColor, 'background-color': postfixBgColor }" :contenteditable="store.editable">
+                :style="{ 'color': suffixColor, 'background-color': postfixBgColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
+                :contenteditable="store.editable">
                 {{ store.prefix }}
               </p>
-              <p class="text-white p-5px" @input="updateSuffix" :style="{ color: prefixColor }"
+              <p class="text-white p-5px" @input="updateSuffix"
+                :style="{ 'color': prefixColor, 'transform': upAndDown ? 'scaleY(-1)' : 'scaleY(1)' }"
                 :contenteditable="store.editable">
                 {{ store.suffix }}
               </p>
@@ -47,7 +51,7 @@
         <TooltipProvider>
           <TooltipRoot>
             <TooltipTrigger class="border-transparent rounded-1 outline-none bg-transparent text-#f90">
-               <div class="py-2 flex flex-row items-center justify-between">
+              <div class="py-2 flex flex-row items-center justify-between">
                 <span> {{ $t("Prefix Text Color:") }}</span>
                 <input type="color" class="border-#ff9900 border-0.1 rounded-1" v-model="prefixColor" />
               </div>
@@ -102,7 +106,7 @@
 
         <!-- font -->
         <div class="flex flex-row items-center justify-between">
-          <Label class="text-#f90">{{ $t("Font") }}</Label>
+          <Label class="text-#f90">{{ $t("FONT") }}</Label>
           <FontSelector class="flex-grow" />
         </div>
 
@@ -110,6 +114,16 @@
         <div class="flex items-center py-2 justify-between">
           <span class="select-none text-#f90 text-sm dark:text-white"> {{ $t("Reverse Highlight:") }} </span>
           <CheckboxRoot v-model="reverseHighlight"
+            class="flex h-6 w-6 appearance-none items-center justify-center rounded-md shadow-sm border-2 border-solid border-#f90 outline-none focus-within:shadow-[0_0_0_2px_black]">
+            <CheckboxIndicator class="w-5 h-5 rounded-1px flex items-center justify-center bg-#f90!">
+              <svg class="i-lucide-check h-5 w-5"></svg>
+            </CheckboxIndicator>
+          </CheckboxRoot>
+        </div>
+        <!-- revert font -->
+        <div class="flex items-center py-2 justify-between">
+          <span class="select-none text-#f90 text-sm dark:text-white"> {{ $t("Flip Word:") }} </span>
+          <CheckboxRoot v-model="upAndDown"
             class="flex h-6 w-6 appearance-none items-center justify-center rounded-md shadow-sm border-2 border-solid border-#f90 outline-none focus-within:shadow-[0_0_0_2px_black]">
             <CheckboxIndicator class="w-5 h-5 rounded-1px flex items-center justify-center bg-#f90!">
               <svg class="i-lucide-check h-5 w-5"></svg>
@@ -131,42 +145,43 @@
 </template>
 
 <script setup>
-import { useStore } from '@/stores/store';
+import { useStore } from '@/stores/store'
 
-const prefixColor = ref('#ffffff');
-const suffixColor = ref('#000000');
-const postfixBgColor = ref('#ff9900');
-const fontSize = ref(60);
-const transparentBg = ref(false);
-const reverseHighlight = ref(false);
+const prefixColor = ref('#ffffff')
+const suffixColor = ref('#000000')
+const postfixBgColor = ref('#ff9900')
+const fontSize = ref([60])
+const transparentBg = ref(false)
+const reverseHighlight = ref(false)
+const upAndDown = ref(false)
 
-const store = useStore();
+const store = useStore()
 
 const updatePrefix = (e) => {
   if (!navigator.userAgent.toLowerCase().includes('firefox')) {
-    store.updatePrefix(e.target.childNodes[0].nodeValue);
+    store.updatePrefix(e.target.childNodes[0].nodeValue)
   }
-};
+}
 
 const updateSuffix = (e) => {
   if (!navigator.userAgent.toLowerCase().includes('firefox')) {
-    store.updateSuffix(e.target.childNodes[0].nodeValue);
+    store.updateSuffix(e.target.childNodes[0].nodeValue)
   }
-};
+}
 
 const twitter = () => {
-  let url = 'https://logoly.pro';
-  let text = encodeURIComponent(`Built with #LogolyPro, by @xiqingongzi ${url}`);
-  window.open(`https://twitter.com/intent/tweet?text=${text}`);
-};
+  let url = 'https://logoly.pro'
+  let text = encodeURIComponent(`Built with #LogolyPro, by @xiqingongzi ${url}`)
+  window.open(`https://twitter.com/intent/tweet?text=${text}`)
+}
 
 const transparentBgColor = computed(() => {
   if (transparentBg.value) {
-    return 'transparent';
+    return 'transparent'
   } else {
-    return '#000000';
+    return '#000000'
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>
