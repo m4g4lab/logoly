@@ -4,22 +4,23 @@
       <TooltipRoot>
         <TooltipTrigger class="bg-black border-none border border-solid border-#333
         rounded-lg p-10 my-10 mx-2.5 max-w-full">
-          <div class="p-5 text-center fw-700" id="logo" :style="{
+          <div class="p-5 text-center fw-700 flex flex-row" id="logo" :style="{
             'font-size': fontSize + 'px',
             'background-color': transparentBgColor
           }">
-            <span @input="updatePrefix" class="text-white py-5px min-w-10" :style="{ color: prefixColor }"
-              :contenteditable="store.editable" spellcheck="false" placeholder="Only">
+            <p @input="updatePrefix" class="text-white py-5px min-w-10 font-[Inter,sans-serif] fw-200"
+              :style="{ color: prefixColor }" :contenteditable="store.editable" spellcheck="false" placeholder="Only">
               {{ store.prefix }}
-            </span>
+            </p>
             <!-- HACK: meaningless text: ".", just to split input area, see: #269 -->
             <span style="font-size: 0">.</span>
-            <span class="text-black bg-#f90 py-5px px-10px rounded-7px" :style="{
+            <p class="text-black bg-#f90 py-5px px-10px rounded-7px font-[Arizonia,cursive] fw-400" :style="{
               color: suffixColor,
               'background-color': postfixBgColor,
               'margin-left': suffixMargin
             }" :contenteditable="store.editable" @input="updateSuffix" spellcheck="false" placeholder="fans">{{
-              store.suffix }}</span>
+              store.suffix }}
+            </p>
           </div>
         </TooltipTrigger>
         <TooltipPortal>
@@ -84,6 +85,7 @@ const transparentBg = ref(false)
 const suffixMargin = computed(() => {
   return '-' + fontSize.value / 30 + 'rem'
 })
+const reverseHighlight = ref(false)
 
 const store = useStore()
 

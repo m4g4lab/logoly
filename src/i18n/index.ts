@@ -18,7 +18,6 @@ const getLocale = () => {
         return res
     }
     const webLang = navigator.language
-    console.log(res, webLang)
     if (webLang.includes('zh')) {
         return 'zh'
     }
@@ -32,7 +31,7 @@ const getLocale = () => {
         return 'ja'
     }
 
-    return  res ||  'en'
+    return res || 'en'
 }
 
 const i18n = createI18n({
